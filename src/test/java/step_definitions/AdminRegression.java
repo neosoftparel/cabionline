@@ -5,6 +5,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import helpers.ScrollintoView;
+import helpers.SelectElements;
 import helpers.Wait;
 
 import static junit.framework.TestCase.assertTrue;
@@ -29,7 +30,7 @@ public class AdminRegression extends BaseClass {
     private CapacityProfilePage capacityProfilePage = new CapacityProfilePage();
     private ScrollintoView scrollintoView = new ScrollintoView();
     private CasePage casePage = new CasePage(driver);
-
+    private SelectElements selectElements = new SelectElements();
 
     @And("^I login to Insight Admin$")
     public void iLoginToInsightAdmin() throws Throwable {
@@ -270,5 +271,41 @@ public class AdminRegression extends BaseClass {
     @And("^I verify advanced search tab is not visible$")
     public void iVerifyAdvancedSearchTabIsNotVisible() throws Throwable {
         assertFalse(casePage.advancedSearchList.size()<0);
+    }
+
+
+    @And("^I verify Screen IQ, CQM, and CQM-DDIQ in products are not selectable$")
+    public void iVerifyScreenIQCQMAndCQMDDIQInProductsAreNotSelectable() throws Throwable {
+        List <WebElement> element = driver.findElements(By.xpath("/html/body/div[2]/div/div/form/div[42]/div[1]/div/label"));
+        List <String>  list = Arrays.asList("CQM Questionnaire", "CQM Questionnaire + DDIQ", "ScreenIQ");
+        System.out.println(element.size());
+        int i = 0;
+        if (element.size() > 0) {
+            for (WebElement label : element) {
+                //System.out.println(list.contains(label.getText()));
+                if(list.contains(label.getText())){
+//                    System.out.println(label.getAttribute("innerHTML"));
+//                    System.out.println(label.getText());
+//                    System.out.println(label.findElement(By.xpath("//input")).getAttribute("disabled"));
+//                    System.out.println(label.findElement(By.xpath("//input")).isEnabled());
+//                    Thread.sleep(10000);
+                    assertTrue(label.getAttribute("innerHTML").contains("disabled"));
+                }
+                i++;
+            }
+
+        }
+        System.out.println(i);
+    }
+
+    @And("^I click on Add client Account tab$")
+    public void iClickOnAddClientAccountTab() throws Throwable {
+        wait.waitAndClick(adminPage.addClientAccount);
+    }
+
+
+    @And("^I select account type as \"([^\"]*)\"$")
+    public void iSelectAccountTypeAs(String arg0) throws Throwable {
+        selectElements.selectByVisibleText(adminPage.clientAccountType,arg0);
     }
 }

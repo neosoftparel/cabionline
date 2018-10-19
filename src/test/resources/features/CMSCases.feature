@@ -51,7 +51,7 @@
     @IDM-160 @product
     Scenario Outline: User creates an order and see the order listed on orders page
       And I click on create order button
-      And I fill order details for "<Type>" type
+      And I fill order details for "<Type>" type product
       And I fill out the subject "company" details
       And I move to next page
       And I see the name of the subject for "company" is added
@@ -680,7 +680,6 @@
     And I click on upload button
     Then I click Upload Report button
     Then I verify Report is uploaded
-
 
  #Leyon
   @IDM-229

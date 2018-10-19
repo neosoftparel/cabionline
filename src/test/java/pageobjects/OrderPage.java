@@ -88,6 +88,9 @@ public class OrderPage extends BaseClass {
     @FindBy(id = "order-title")
     public WebElement ordertitle;
 
+    @FindBy(id = "SelectedUserId")
+    public WebElement requestor;
+
     @FindBy(xpath = "//*[@id='jqGrid']/tbody/tr[2]/td[3]")
     public WebElement inProgressOrder;
 
@@ -215,6 +218,22 @@ public class OrderPage extends BaseClass {
     public String[] fillOrderDetails(String orderTypeName, String orderNameString) throws Throwable {
         selectElements.selectByIndexNumbert(account, 1);
         selectElements.selectByVisibleText(orderType, orderTypeName);
+        selectElements.selectByIndexNumbert(requestor, 1);
+        orderName.sendKeys(orderNameString);
+        wait.waitAndClick(addDocument);
+        String fileUpload = System.getProperty("user.dir") + File.separator + "testData" + File.separator + "Upload" + File.separator + "test1kb.pdf";
+        wait.waitUntilPresent(casePage.uploadReport).sendKeys(fileUpload);
+        casePage.caseReportTitle.sendKeys("Dummy Report");
+        wait.waitAndClick(saveButton);
+        wait.waitUntilPresent(deleteButton);
+        Thread.sleep(5000);
+        wait.waitAndClick(continueButton);
+        return new String[]{orderTypeName, orderNameString};
+    }
+
+    public String[] fillOrderDetailsOMS(String orderTypeName, String orderNameString) throws Throwable {
+        selectElements.selectByIndexNumbert(account, 1);
+        selectElements.selectByVisibleText(orderType, orderTypeName);
         orderName.sendKeys(orderNameString);
         wait.waitAndClick(addDocument);
         String fileUpload = System.getProperty("user.dir") + File.separator + "testData" + File.separator + "Upload" + File.separator + "test1kb.pdf";
@@ -238,6 +257,7 @@ public class OrderPage extends BaseClass {
 
 
     public  String[] fillOrderDetailsicv(String orderTypeicv, String orderNameicv) {
+        selectElements.selectByIndexNumbert(account, 1);
         selectElements.selectByVisibleText(orderType, orderTypeicv);
         orderName.sendKeys(orderNameicv);
         continueButton.click();

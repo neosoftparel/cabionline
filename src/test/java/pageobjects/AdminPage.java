@@ -39,6 +39,12 @@ public class AdminPage extends BaseClass {
     @FindBy(linkText = "Log Off")
     public WebElement logOffDiligenceAdmin;
 
+    @FindBy(partialLinkText = "Add Client Account")
+    public WebElement addClientAccount;
+
+    @FindBy(id = "ClientAccountTypeId")
+    public WebElement clientAccountType;
+
     @FindBy(linkText = "Update User")
     public WebElement updateUserLinkDiligenceSkills;
 

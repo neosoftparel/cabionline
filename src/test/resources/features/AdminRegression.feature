@@ -84,6 +84,16 @@ Feature: AdminRegression
    And I click on Update Account link
    And I verify only diligence product types are selectable
 
+
+ #Leyon
+ @IDM-341 @notselectable
+ Scenario: When selecting product types in Diligence client account then Screen IQ, CQM, and CQM + DDIQ are not selectable
+   And I click on client accounts tab
+   And I click on Add client Account tab
+   And I select account type as "Diligence"
+   And I verify Screen IQ, CQM, and CQM-DDIQ in products are not selectable
+
+
  #Leyon
  @IDM-308 @advancedcheckbox
  Scenario: Client Account on Admin should have flag to check or uncheck Advanced Search tab on or off

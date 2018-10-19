@@ -206,6 +206,12 @@ public class OMSRegressionSteps extends BaseClass {
 
     @And("^I fill order details for \"([^\"]*)\" type$")
     public void iFillOrderDetailsForType(String arg0) throws Throwable {
+        orderPage.fillOrderDetailsOMS(arg0, orderName);
+        System.out.println("order name is used: " + orderName);
+    }
+
+    @And("^I fill order details for \"([^\"]*)\" type product$")
+    public void iFillOrderDetailsForTypeProduct(String arg0) throws Throwable {
         orderPage.fillOrderDetails(arg0, orderName);
         System.out.println("order name is used: " + orderName);
     }

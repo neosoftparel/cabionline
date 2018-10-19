@@ -224,7 +224,7 @@ public class CasePage extends BaseClass{
     @FindBy (xpath = "//*[@id='column-header-row']/div[4]/div/h4")
     public List<WebElement> criminalRecordsDeliverableList;
 
-    @FindBy (xpath = "//*[@id='jqGridProducts']/tbody/tr[7]/td[5]/a")
+    @FindBy (xpath = "//*[@id='jqGridProducts']/tbody/tr[9]/td[5]/a")
     public WebElement level1Details;
 
     @FindBy (xpath = "//*[@id='DeliverablesConfiguration_DeliverablesSelectedIds']/option[6]")
