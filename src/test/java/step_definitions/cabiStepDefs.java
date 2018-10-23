@@ -29,6 +29,7 @@ public class cabiStepDefs extends BaseClass {
 //        driver = new ChromeDriver();
 //        driver.manage().window().maximize();
         driver.get("https://www.cabionline.com/");
+        System.out.println(driver.getTitle());
 
     }
     @When("^I click on confirm region$")
@@ -108,6 +109,57 @@ public class cabiStepDefs extends BaseClass {
     @And("^I see the signup page instead of an error message when the email adderess doesnt exist$")
     public void iSeeTheSignupPageInsteadOfAnErrorMessageWhenTheEmailAdderessDoesntExist() throws Throwable {
         assertEquals(driver.findElement(By.className("title")).getText(),"New to cabi?");
+    }
+
+    @And("^I click on flag to change region to US$")
+    public void iClickOnFlagToChangeRegionToUS() throws Throwable {
+        Thread.sleep(5000);
+        wait.waitAndClick(driver.findElement(By.xpath("//*[@id='page-']/div[2]/div[3]/div/div/div[5]/locale-indicator")));
+        wait.waitAndClick(driver.findElement(By.xpath("//*[@id='modal']/locale-selector/ul/li[2]")));
+        driver.findElement(By.xpath(".//*[@id='modal']/locale-selector/div/a")).click();
+        Thread.sleep(4000);
+    }
+
+    @When("^I click on confirm region for US$")
+    public void iClickOnConfirmRegionForUS() throws Throwable {
+        wait.waitAndClick(driver.findElement(By.xpath("//*[@id='modal']/locale-selector/ul/li[1]")));
+        driver.findElement(By.xpath(".//*[@id='modal']/locale-selector/div/a")).click();
+        Thread.sleep(4000);
+    }
+
+    @And("^I click on a product$")
+    public void iClickOnAProduct() throws Throwable {
+        driver.findElement(By.xpath(".//*[@id='mm-0']/div/section[3]/div/div/div/a[3]/div/div[2]")).click();
+        Thread.sleep(2000);
+    }
+
+    @And("^I click on flag icon to change region to Canada$")
+    public void iClickOnFlagIconToChangeRegionToCanada() throws Throwable {
+        Thread.sleep(5000);
+        wait.waitAndClick(driver.findElement(By.xpath("//*[@id='page-collection-clothes-cloak-cardigan']/div[2]/div[3]/div/div/div[5]/locale-indicator/locale-flag")));
+        wait.waitAndClick(driver.findElement(By.xpath("//*[@id='modal']/locale-selector/ul/li[2]")));
+        driver.findElement(By.xpath(".//*[@id='modal']/locale-selector/div/a")).click();
+        Thread.sleep(4000);
+    }
+
+    @And("^I verify the price of the product is in dollars$")
+    public void iVerifyThePriceOfTheProductIsInDollars() throws Throwable {
+        assertTrue(driver.findElement(By.xpath("//*[@id='item-meta-data']/ul/li[5]/div")).getText().contains("$"));
+    }
+
+    @And("^I verify the price of the product is in pounds$")
+    public void iVerifyThePriceOfTheProductIsInPounds() throws Throwable {
+        assertTrue(driver.findElement(By.xpath("//*[@id='item-meta-data']/ul/li[5]/div")).getText().contains("£"));
+    }
+
+
+    @And("^I click on flag icon to change region to UK$")
+    public void iClickOnFlagIconToChangeRegionToUK() throws Throwable {
+        Thread.sleep(5000);
+        wait.waitAndClick(driver.findElement(By.xpath("//*[@id='page-collection-clothes-cloak-cardigan']/div[2]/div[3]/div/div/div[5]/locale-indicator/locale-flag")));
+        wait.waitAndClick(driver.findElement(By.xpath("//*[@id='modal']/locale-selector/ul/li[3]")));
+        driver.findElement(By.xpath(".//*[@id='modal']/locale-selector/div/a")).click();
+        Thread.sleep(4000);
     }
 }
 	

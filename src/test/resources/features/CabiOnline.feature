@@ -33,3 +33,14 @@ Feature: Test Cabionline smoke scenario
     Then check cart
     Then checkout from cart
     Then quit browser
+
+ @currency
+ Scenario: Currency Check
+   Given Open chrome and start application
+   When I click on confirm region for US
+   And  I click on a product
+   And  I verify the price of the product is in dollars
+   And  I click on flag icon to change region to Canada
+   And  I verify the price of the product is in dollars
+   And  I click on flag icon to change region to UK
+   And  I verify the price of the product is in pounds
