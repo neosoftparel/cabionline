@@ -1,5 +1,8 @@
 package step_definitions;
 
+import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
+import helpers.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +14,11 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import step_definitions.BaseClass;
 
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
+
 public class cabiStepDefs extends BaseClass {
+    Wait wait = new Wait();
 
 //    WebDriver driver;
 
@@ -80,6 +87,28 @@ public class cabiStepDefs extends BaseClass {
 
     }
 
+    @And("^I click on login user icon$")
+    public void iClickOnLoginUserIcon() throws Throwable {
+       Thread.sleep(5000);
+       wait.waitUntilClickable(driver.findElement(By.xpath("//*[@id='page-']/div[2]/div[3]/div/div/div[5]/div[2]/a"))).click();
+    }
+
+    @And("^I enter email in Email address field$")
+    public void iEnterEmailInEmailAddressField() throws Throwable {
+        Thread.sleep(5000);
+        wait.waitAndSendKeysByElement(driver.findElement((By.xpath("//*[@id='page-']/div[7]/div/div/div/account/div/login-gateway/div/form/div[1]/custom-input/div/input"))),"user@neosofttech.com");
+    }
+
+    @And("^I click on Continue button for login$")
+    public void iClickOnContinueButtonForLogin() throws Throwable {
+       wait.waitAndClick(driver.findElement(By.className("btn-continue")));
+       Thread.sleep(5000);
+    }
+
+    @And("^I see the signup page instead of an error message when the email adderess doesnt exist$")
+    public void iSeeTheSignupPageInsteadOfAnErrorMessageWhenTheEmailAdderessDoesntExist() throws Throwable {
+        assertEquals(driver.findElement(By.className("title")).getText(),"New to cabi?");
+    }
 }
 	
 	
